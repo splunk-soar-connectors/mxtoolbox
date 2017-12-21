@@ -1,1 +1,1 @@
-*.py.git*.git*
+*.py.git*.git*.git*
