@@ -5,182 +5,206 @@
     "publisher": "Phantom",
     "type": "investigative",
     "main_module": "mxtoolbox_connector.pyc",
-    "app_version": "1.0.13",
-    "utctime_updated": "2017-04-29T02:30:28.000000Z",
+    "app_version": "1.0.17",
+    "utctime_updated": "2018-01-27T21:17:07.000000Z",
     "package_name": "phantom_mxtoolbox",
     "product_vendor": "MxToolbox",
     "product_name": "MxToolbox",
     "product_version_regex": ".*",
     "min_phantom_version": "2.0.264",
-    "logo": "mxtoolbox.png",
-    "license": "Copyright (c) Phantom Cyber Corporation 2016",
+    "logo": "logo_mxtoolbox.svg",
+    "logo_dark": "logo_mxtoolbox_dark.svg",
+    "license": "Copyright (c) Phantom Cyber Corporation, 2016-2018",
     "configuration": {
-      "api_token": {
-        "data_type": "string",
-        "order": 2,
-        "description": "API token",
-        "required": true
-      }
+        "api_token": {
+            "data_type": "string",
+            "order": 2,
+            "description": "API token",
+            "required": true
+        }
     },
     "actions": [
-      {
-        "action": "test connectivity",
-        "description": "Validates the asset configuration for connectivity",
-        "verbose": "This action sends a single request to the MxToolbox API.",
-        "type": "test",
-        "identifier": "test_asset_connectivity",
-        "read_only": true,
-        "parameters": {},
-        "output": [],
-        "versions":"EQ(*)"
-      },
-      {
-        "action": "lookup domain",
-        "description": "Returns the result of a lookup on a specific url",
-        "verbose": "Lookup types in mission control are limited to:<ul><li><b>mx</b></li><li><b>a</b></li><li><b>dns</b></li><li><b>spf</b></li><li><b>txt</b></li><li><b>soa</b></li></ul>There is support from MxToolbox for other types of lookups which can be specified within a playbook.",
-        "type": "investigate",
-        "identifier": "lookup_domain",
-        "read_only": true,
-        "parameters": {
-          "domain": {
-            "description": "Domain to query",
-            "data_type": "string",
-            "order": 0,
-            "primary": true,
-            "required": true,
-            "contains": ["domain"]
-          },
-          "type": {
-            "description": "Type of domain lookup",
-            "data_type": "string",
-            "order": 1,
-            "primary": true,
-            "value_list": ["mx", "a", "dns", "spf", "txt", "soa"],
-            "required": true
-          }
+        {
+            "action": "test connectivity",
+            "description": "Validates the asset configuration for connectivity",
+            "verbose": "This action sends a single request to the MxToolbox API.",
+            "type": "test",
+            "identifier": "test_asset_connectivity",
+            "read_only": true,
+            "parameters": {},
+            "output": [],
+            "versions": "EQ(*)"
         },
-       "render": {
-          "width": 12,
-          "title": "Lookup Domain",
-          "type": "json",
-          "height": 5
+        {
+            "action": "lookup domain",
+            "description": "Returns the result of a lookup on a specific url",
+            "verbose": "Lookup types in mission control are limited to:<ul><li><b>mx</b></li><li><b>a</b></li><li><b>dns</b></li><li><b>spf</b></li><li><b>txt</b></li><li><b>soa</b></li></ul>There is support from MxToolbox for other types of lookups which can be specified within a playbook.",
+            "type": "investigate",
+            "identifier": "lookup_domain",
+            "read_only": true,
+            "parameters": {
+                "domain": {
+                    "description": "Domain to query",
+                    "data_type": "string",
+                    "order": 0,
+                    "primary": true,
+                    "required": true,
+                    "contains": [
+                        "domain"
+                    ]
+                },
+                "type": {
+                    "description": "Type of domain lookup",
+                    "data_type": "string",
+                    "order": 1,
+                    "primary": true,
+                    "value_list": [
+                        "mx",
+                        "a",
+                        "dns",
+                        "spf",
+                        "txt",
+                        "soa"
+                    ],
+                    "required": true
+                }
+            },
+            "render": {
+                "width": 12,
+                "title": "Lookup Domain",
+                "type": "json",
+                "height": 5
+            },
+            "output": [
+                {
+                    "data_path": "action_result.data.*.TTL",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.Status",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.IP_Address",
+                    "data_type": "string",
+                    "contains": [
+                        "ip"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.Domain_Name",
+                    "data_type": "string",
+                    "contains": [
+                        "domain"
+                    ]
+                },
+                {
+                    "data_path": "action_result.status",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.message",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.summary.total_objects",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "action_result.parameter.type",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.parameter.domain",
+                    "data_type": "string",
+                    "contains": [
+                        "domain"
+                    ]
+                },
+                {
+                    "data_path": "summary.total_objects",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "summary.total_objects_successful",
+                    "data_type": "numeric"
+                }
+            ],
+            "versions": "EQ(*)"
         },
-        "output": [
-          {
-            "data_path": "action_result.data.*.TTL",
-            "data_type": "string"
-          },
-          {
-            "data_path": "action_result.data.*.Status",
-            "data_type": "string"
-          },
-          {
-            "data_path": "action_result.data.*.IP_Address",
-            "data_type": "string",
-            "contains": ["ip"]
-          },
-          {
-            "data_path": "action_result.data.*.Domain_Name",
-            "data_type": "string",
-            "contains": ["domain"]
-          },
-          {
-            "data_path": "action_result.status",
-            "data_type": "string"
-          },
-          {
-            "data_path": "action_result.message",
-            "data_type": "string"
-          },
-          {
-            "data_path": "action_result.summary.total_objects",
-            "data_type": "numeric"
-          },
-          {
-            "data_path": "action_result.parameter.type",
-            "data_type": "string"
-          },
-          {
-            "data_path": "action_result.parameter.domain",
-            "data_type": "string",
-            "contains": ["domain"]
-          },
-          {
-            "data_path": "summary.total_objects",
-            "data_type": "numeric"
-          },
-          {
-            "data_path": "summary.total_objects_successful",
-            "data_type": "numeric"
-          }
-        ],
-        "versions": "EQ(*)"
-      },
-      {
-        "action": "lookup ip",
-        "description": "Returns the result of a lookup on a specific ip address",
-        "verbose": "This action only uses the lookup type of 'ptr'.",
-        "type": "investigate",
-        "identifier": "lookup_ip",
-        "read_only": true,
-        "parameters": {
-          "ip": {
-            "description": "IP to query",
-            "data_type": "string",
-            "order": 0,
-            "primary": true,
-            "required": true,
-            "contains": ["ip"]
-          }
-        },
-          "render": {
-            "width": 12,
-            "title": "Lookup Ip",
-            "type": "json",
-            "height": 5
-          },
-          "output": [
-            {
-              "data_path": "action_result.data.*.TTL",
-              "data_type": "string"
+        {
+            "action": "lookup ip",
+            "description": "Returns the result of a lookup on a specific ip address",
+            "verbose": "This action only uses the lookup type of 'ptr'.",
+            "type": "investigate",
+            "identifier": "lookup_ip",
+            "read_only": true,
+            "parameters": {
+                "ip": {
+                    "description": "IP to query",
+                    "data_type": "string",
+                    "order": 0,
+                    "primary": true,
+                    "required": true,
+                    "contains": [
+                        "ip"
+                    ]
+                }
             },
-            {
-              "data_path": "action_result.data.*.IP_Address",
-              "data_type": "string",
-              "contains": ["ip"]
+            "render": {
+                "width": 12,
+                "title": "Lookup Ip",
+                "type": "json",
+                "height": 5
             },
-            {
-              "data_path": "action_result.data.*.Domain_Name",
-              "data_type": "string",
-              "contains": ["domain"]
-            },
-            {
-              "data_path": "action_result.status",
-              "data_type": "string"
-            },
-            {
-              "data_path": "action_result.message",
-              "data_type": "string"
-            },
-            {
-              "data_path": "action_result.summary.total_objects",
-              "data_type": "numeric"
-            },
-            {
-              "data_path": "action_result.parameter.ip",
-              "data_type": "string",
-              "contains": ["ip"]
-            },
-            {
-              "data_path": "summary.total_objects",
-              "data_type": "numeric"
-            },
-            {
-              "data_path": "summary.total_objects_successful",
-              "data_type": "numeric"
-            }
-          ],
-          "versions": "EQ(*)"
-      }
+            "output": [
+                {
+                    "data_path": "action_result.data.*.TTL",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.IP_Address",
+                    "data_type": "string",
+                    "contains": [
+                        "ip"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.Domain_Name",
+                    "data_type": "string",
+                    "contains": [
+                        "domain"
+                    ]
+                },
+                {
+                    "data_path": "action_result.status",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.message",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.summary.total_objects",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "action_result.parameter.ip",
+                    "data_type": "string",
+                    "contains": [
+                        "ip"
+                    ]
+                },
+                {
+                    "data_path": "summary.total_objects",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "summary.total_objects_successful",
+                    "data_type": "numeric"
+                }
+            ],
+            "versions": "EQ(*)"
+        }
     ]
 }
