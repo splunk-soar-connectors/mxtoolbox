@@ -1,14 +1,10 @@
 # --
-# File: zendesk/zendesk_consts.py
+# File: mxtoolbox_consts.py
 #
-# Copyright (c) Phantom Cyber Corporation, 2016
+# Copyright (c) 2016-2021 Splunk Inc.
 #
-# This unpublished material is proprietary to Phantom Cyber.
-# All rights reserved. The methods and
-# techniques described herein are considered trade secrets
-# and/or confidential. Reproduction or distribution, in whole
-# or in part, is forbidden except by express written permission
-# of Phantom Cyber.
+# SPLUNK CONFIDENTIAL - Use or disclosure of this material in whole or in part
+# without a valid written license from Splunk Inc. is PROHIBITED.
 #
 # --
 
@@ -40,3 +36,6 @@ MXTOOLBOX_TEST_FAILURE = "Invalid API key."
 
 MXTOOLBOX_USING_BASE_URL = "Using url: {base_url}"
 MXTOOLBOX_USING_PORT = "?port={port}"
+
+ACTION_ID_LOOKUP_DOMAIN = 'lookup_domain'
+ACTION_ID_LOOKUP_IP = "lookup_ip"

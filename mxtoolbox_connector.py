@@ -1,14 +1,11 @@
 # --
 # File: mxtoolbox_connector.py
 #
-# Copyright (c) Phantom Cyber Corporation, 2016
+# Copyright (c) 2016-2021 Splunk Inc.
 #
-# This unpublished material is proprietary to Phantom Cyber.
-# All rights reserved. The methods and
-# techniques described herein are considered trade secrets
-# and/or confidential. Reproduction or distribution, in whole
-# or in part, is forbidden except by express written permission
-# of Phantom Cyber.
+# SPLUNK CONFIDENTIAL - Use or disclosure of this material in whole or in part
+# without a valid written license from Splunk Inc. is PROHIBITED.
+#
 # --
 
 # Phantom Imports below
@@ -27,9 +24,6 @@ import simplejson as json
 class MxtoolboxConnector(BaseConnector):
     # Actions that are supported by this connector
     # Actions are limited to a couple of things on the API due to the very low (64) limit
-    ACITON_ID_TEST_ASSET_CONNECTIVITY = 'test_asset_connectivity'
-    ACTION_ID_LOOKUP_DOMAIN = 'lookup_domain'
-    ACTION_ID_LOOKUP_IP = "lookup_ip"
 
     def __init__(self):
 
@@ -76,23 +70,21 @@ class MxtoolboxConnector(BaseConnector):
                              headers=headers,
                              verify=False)
         except Exception as e:
-            return (action_result.set_status(phantom.APP_ERROR, MXTOOLBOX_ERR_SERVER_CONNECTION, e), resp_json)
+            return action_result.set_status(phantom.APP_ERROR, MXTOOLBOX_ERR_SERVER_CONNECTION, e), resp_json
 
         # Try to parse the response JSON.  Will except if the response is not a valid json
         try:
             resp_json = r.json()
         except Exception as e:
             msg_string = MXTOOLBOX_ERR_JSON_PARSE.format(url=endpoint, raw_text=r.text)
-            return (action_result.set_status(phantom.APP_ERROR, msg_string, e), resp_json)
+            return action_result.set_status(phantom.APP_ERROR, msg_string, e), resp_json
 
         # This if/else block is the final decider for whether the action returns as SUCCESS or failure.
         if (200 <= r.status_code <= 399):
-            return (phantom.APP_SUCCESS, resp_json)
+            return phantom.APP_SUCCESS, resp_json
         else:
             details = json.dumps(resp_json).replace('{', '').replace('}', '')
-            return (action_result.set_status(phantom.APP_ERROR,
-                                             MXTOOLBOX_ERR_FROM_SERVER.format(status=r.status_code, detail=details)),
-                    resp_json)
+            return action_result.set_status(phantom.APP_ERROR, MXTOOLBOX_ERR_FROM_SERVER.format(status=r.status_code, detail=details)), resp_json
 
     def _test_connectivity(self, param):
         """ This action tests the connectivity to the Mxtoolbox API.  It must make one call to the API which counts
@@ -173,7 +165,7 @@ class MxtoolboxConnector(BaseConnector):
         for elem in response[MXTOOLBOX_JSON_RESP_KEY]:
             temp_dict = {}
 
-            for key, value in elem.iteritems():
+            for key, value in elem.items():
                 if key in needed:
                     temp_dict[key.replace(" ", "_")] = value
 
@@ -196,9 +188,9 @@ class MxtoolboxConnector(BaseConnector):
 
         if (action == phantom.ACTION_ID_TEST_ASSET_CONNECTIVITY):
             ret_val = self._test_connectivity(param)
-        elif (action == self.ACTION_ID_LOOKUP_DOMAIN):
+        elif (action == ACTION_ID_LOOKUP_DOMAIN):
             ret_val = self._lookup_domain(param, type=MXTOOLBOX_JSON_DOMAIN)
-        elif (action == self.ACTION_ID_LOOKUP_IP):
+        elif (action == ACTION_ID_LOOKUP_IP):
             ret_val = self._lookup_domain(param, type=MXTOOLBOX_JSON_IP)
         return ret_val
 
@@ -222,6 +214,6 @@ if __name__ == '__main__':
 
         ret_val = connector._handle_action(json.dumps(in_json), None)
 
-        print ret_val
+        print(ret_val)
 
     exit(0)
