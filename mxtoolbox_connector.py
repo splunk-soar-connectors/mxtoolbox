@@ -119,7 +119,7 @@ class MxtoolboxConnector(BaseConnector):
 
         return self.set_status_save_progress(phantom.APP_SUCCESS, MXTOOLBOX_SUCC_CONNECTIVITY_TEST)
 
-    def _lookup_domain(self, param, type=None):
+    def _lookup_domain(self, param):
 
         action_result = self.add_action_result(ActionResult(dict(param)))
 
@@ -189,9 +189,9 @@ class MxtoolboxConnector(BaseConnector):
         if (action == phantom.ACTION_ID_TEST_ASSET_CONNECTIVITY):
             ret_val = self._test_connectivity(param)
         elif (action == ACTION_ID_LOOKUP_DOMAIN):
-            ret_val = self._lookup_domain(param, type=MXTOOLBOX_JSON_DOMAIN)
+            ret_val = self._lookup_domain(param)
         elif (action == ACTION_ID_LOOKUP_IP):
-            ret_val = self._lookup_domain(param, type=MXTOOLBOX_JSON_IP)
+            ret_val = self._lookup_domain(param)
         return ret_val
 
 
