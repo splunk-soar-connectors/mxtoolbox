@@ -168,7 +168,6 @@ class MxtoolboxConnector(BaseConnector):
         if (phantom.is_fail(ret_val)):
             self.debug_print(action_result.get_message())
             self.set_status(phantom.APP_ERROR, action_result.get_message())
-            self.append_to_message(MXTOOLBOX_ERR_CONNECTIVITY_TEST)
             return phantom.APP_ERROR
 
         needed = ["Status", "IP Address", "TTL", "Domain Name"]
@@ -194,7 +193,7 @@ class MxtoolboxConnector(BaseConnector):
                 action_result.add_data(temp_dict)
 
         if (len(response[MXTOOLBOX_JSON_RESP_KEY]) < 1):
-            return (action_result.set_status(phantom.APP_ERROR, "Lookup did not return any useful information."))
+            return (action_result.set_status(phantom.APP_ERROR, MXTOOLBOX_ERROR_LOOKUP_NO_DATA_FOUND))
 
         action_result.set_summary({"total_objects": len(response[MXTOOLBOX_JSON_RESP_KEY])})
 

@@ -40,3 +40,4 @@ MXTOOLBOX_USING_PORT = "?port={port}"
 
 ACTION_ID_LOOKUP_DOMAIN = 'lookup_domain'
 ACTION_ID_LOOKUP_IP = "lookup_ip"
+MXTOOLBOX_ERROR_LOOKUP_NO_DATA_FOUND = "Lookup did not return any useful information."
