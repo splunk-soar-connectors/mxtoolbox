@@ -135,7 +135,7 @@ class MxtoolboxConnector(BaseConnector):
             self.append_to_message(MXTOOLBOX_ERR_CONNECTIVITY_TEST)
 
             return phantom.APP_ERROR
-
+        self.save_progress(MXTOOLBOX_SUCC_CONNECTIVITY_MESSAGE)
         return self.set_status_save_progress(phantom.APP_SUCCESS, MXTOOLBOX_SUCC_CONNECTIVITY_TEST)
 
     def _lookup_domain(self, param):
