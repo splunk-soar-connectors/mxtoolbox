@@ -13,7 +13,7 @@ MXTOOLBOX_BASE_ENDPOINT_URL = "lookup/{type}/{domain}"
 MXTOOLBOX_DOMAIN_LINK = "?argument={domain}"
 
 MXTOOLBOX_ERR_API_UNSUPPORTED_METHOD = "Unsupported method"
-MXTOOLBOX_ERR_CONNECTIVITY_TEST = "Connectivity test failed"
+MXTOOLBOX_ERR_CONNECTIVITY_TEST = "Test connectivity failed"
 MXTOOLBOX_ERR_FROM_SERVER = "API failed, Status code: {status}, Detail: {detail}"
 MXTOOLBOX_ERR_JSON_PARSE = "Unable to parse reply as a Json from URL {url}. raw string reply: '{raw_text}'"
 MXTOOLBOX_ERR_SERVER_CONNECTION = "Connection failed"
