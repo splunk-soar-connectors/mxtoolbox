@@ -1,7 +1,7 @@
 {
     "appid": "c8aa785f-84d8-4528-a123-763b5a243902",
     "name": "MxToolbox",
-    "description": "This app implements investigative actions on domains and IPs.  ",
+    "description": "This app implements investigative actions on domains and IPs",
     "publisher": "Splunk",
     "type": "investigative",
     "main_module": "mxtoolbox_connector.py",
@@ -22,7 +22,7 @@
     "configuration": {
         "api_token": {
             "data_type": "password",
-            "order": 2,
+            "order": 0,
             "description": "API token",
             "required": true
         }
@@ -69,17 +69,8 @@
                         "txt",
                         "soa"
                     ],
-                    "required": true,
-                    "contains": [
-                        "type"
-                    ]
+                    "required": true
                 }
-            },
-            "render": {
-                "width": 12,
-                "title": "Lookup Domain",
-                "type": "json",
-                "height": 5
             },
             "output": [
                 {
@@ -141,9 +132,6 @@
                 {
                     "data_path": "action_result.parameter.type",
                     "data_type": "string",
-                    "contains": [
-                        "type"
-                    ],
                     "example_values": [
                         "dns"
                     ]
@@ -173,6 +161,12 @@
                     ]
                 }
             ],
+            "render": {
+                "width": 12,
+                "title": "Lookup Domain",
+                "type": "json",
+                "height": 5
+            },
             "versions": "EQ(*)"
         },
         {
@@ -194,12 +188,6 @@
                         "ipv6"
                     ]
                 }
-            },
-            "render": {
-                "width": 12,
-                "title": "Lookup Ip",
-                "type": "json",
-                "height": 5
             },
             "output": [
                 {
@@ -278,6 +266,12 @@
                     ]
                 }
             ],
+            "render": {
+                "width": 12,
+                "title": "Lookup Ip",
+                "type": "json",
+                "height": 5
+            },
             "versions": "EQ(*)"
         }
     ]
