@@ -17,11 +17,11 @@
     "python_version": "3",
     "min_phantom_version": "4.9.39220",
     "latest_tested_versions": [
-        "Cloud API 30 june, 2021"
+        "Cloud, api/v1/ June 2, 2021"
     ],
     "configuration": {
         "api_token": {
-            "data_type": "string",
+            "data_type": "password",
             "order": 2,
             "description": "API token",
             "required": true

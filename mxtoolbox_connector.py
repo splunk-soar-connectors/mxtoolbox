@@ -65,10 +65,9 @@ class MxtoolboxConnector(BaseConnector):
 
         return True
 
-
     def _make_rest_call(self, endpoint, action_result, headers={}, params=None, data=None, method="get"):
-        ''' Makes the actual rest call for any action that requires a rest call.  Returns success or fail, and
-            the response '''
+        """ Makes the actual rest call for any action that requires a rest call.  Returns success or fail, and
+            the response """
 
         # Update the header
         headers.update(self._headers)
