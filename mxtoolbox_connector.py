@@ -18,6 +18,7 @@ from mxtoolbox_consts import *
 
 # Regular imports below
 import requests
+import ipaddress
 import simplejson as json
 
 
@@ -44,7 +45,26 @@ class MxtoolboxConnector(BaseConnector):
         # Setting the header to an authorization allows the user to skip logging in and provide the api key only.
         self._headers = {'Authorization': self._key}
 
+        self.set_validator("ipv6", self._is_ip)
+
         return phantom.APP_SUCCESS
+
+    def _is_ip(self, input_ip_address):
+        """ Function that checks given address and return True if address is valid IPv4 or IPV6 address.
+
+        :param input_ip_address: IP address
+        :return: status (success/failure)
+        """
+
+        ip_address_input = input_ip_address
+
+        try:
+            ipaddress.ip_address(str(ip_address_input))
+        except:
+            return False
+
+        return True
+
 
     def _make_rest_call(self, endpoint, action_result, headers={}, params=None, data=None, method="get"):
         ''' Makes the actual rest call for any action that requires a rest call.  Returns success or fail, and
@@ -132,8 +152,10 @@ class MxtoolboxConnector(BaseConnector):
         if isinstance(command, bool):
 
             ip = param[MXTOOLBOX_JSON_IP]
+            ip = ipaddress.ip_address(ip).exploded
+            domain = MXTOOLBOX_DOMAIN_LINK.format(domain=ip)
 
-            endpoint = MXTOOLBOX_BASE_ENDPOINT_URL.format(type="ptr", domain=ip)
+            endpoint = MXTOOLBOX_BASE_ENDPOINT_URL.format(type="ptr", domain=domain)
 
         else:
 

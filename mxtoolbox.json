@@ -190,7 +190,8 @@
                     "primary": true,
                     "required": true,
                     "contains": [
-                        "ip"
+                        "ip",
+                        "ipv6"
                     ]
                 }
             },
@@ -212,7 +213,8 @@
                     "data_path": "action_result.data.*.IP_Address",
                     "data_type": "string",
                     "contains": [
-                        "ip"
+                        "ip",
+                        "ipv6"
                     ],
                     "example_values": [
                         "10.1.1.9"
@@ -254,7 +256,8 @@
                     "data_path": "action_result.parameter.ip",
                     "data_type": "string",
                     "contains": [
-                        "ip"
+                        "ip",
+                        "ipv6"
                     ],
                     "example_values": [
                         "10.1.1.9"

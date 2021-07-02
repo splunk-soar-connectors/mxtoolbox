@@ -10,6 +10,7 @@
 
 MXTOOLBOX_BASE_URL = "https://mxtoolbox.com/api/v1/"
 MXTOOLBOX_BASE_ENDPOINT_URL = "lookup/{type}/{domain}"
+MXTOOLBOX_DOMAIN_LINK = "?argument={domain}"
 
 MXTOOLBOX_ERR_API_UNSUPPORTED_METHOD = "Unsupported method"
 MXTOOLBOX_ERR_CONNECTIVITY_TEST = "Connectivity test failed"
@@ -29,7 +30,7 @@ MXTOOLBOX_JSON_PORT = "port"
 MXTOOLBOX_MSG_GET_INCIDENT_TEST = "Querying google.com. . ."
 
 MXTOOLBOX_SUCC_LOOKUP = "Successfully received {type} of {domain}."
-MXTOOLBOX_SUCC_CONNECTIVITY_TEST = "Successfully queried google.com and received a JSON reply."
+MXTOOLBOX_SUCC_CONNECTIVITY_TEST = "Test Connectivity Passed"
 
 MXTOOLBOX_TEST_CONNECTION_ENDPOINT = "lookup/dns/google.com"
 MXTOOLBOX_TEST_FAILURE = "Invalid API key."
