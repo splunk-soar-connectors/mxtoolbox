@@ -1,24 +1,28 @@
 {
     "appid": "c8aa785f-84d8-4528-a123-763b5a243902",
     "name": "MxToolbox",
-    "description": "This app implements investigative actions on domains and IPs.  ",
-    "publisher": "Phantom",
+    "description": "This app implements investigative actions on domains and IPs",
+    "publisher": "Splunk",
     "type": "investigative",
-    "main_module": "mxtoolbox_connector.pyc",
-    "app_version": "1.0.17",
-    "utctime_updated": "2018-01-27T21:17:07.000000Z",
+    "main_module": "mxtoolbox_connector.py",
+    "app_version": "2.0.2",
+    "utctime_updated": "2021-07-14T05:40:02.000000Z",
     "package_name": "phantom_mxtoolbox",
     "product_vendor": "MxToolbox",
     "product_name": "MxToolbox",
     "product_version_regex": ".*",
-    "min_phantom_version": "2.0.264",
-    "logo": "logo_mxtoolbox.svg",
-    "logo_dark": "logo_mxtoolbox_dark.svg",
-    "license": "Copyright (c) Phantom Cyber Corporation, 2016-2018",
+    "logo": "mxtoolbox.svg",
+    "logo_dark": "mxtoolbox_dark.svg",
+    "license": "Copyright (c) 2016-2021 Splunk Inc.",
+    "python_version": "3",
+    "min_phantom_version": "4.9.39220",
+    "latest_tested_versions": [
+        "Cloud, api/v1/ June 2, 2021"
+    ],
     "configuration": {
         "api_token": {
-            "data_type": "string",
-            "order": 2,
+            "data_type": "password",
+            "order": 0,
             "description": "API token",
             "required": true
         }
@@ -57,7 +61,6 @@
                     "description": "Type of domain lookup",
                     "data_type": "string",
                     "order": 1,
-                    "primary": true,
                     "value_list": [
                         "mx",
                         "a",
@@ -69,26 +72,29 @@
                     "required": true
                 }
             },
-            "render": {
-                "width": 12,
-                "title": "Lookup Domain",
-                "type": "json",
-                "height": 5
-            },
             "output": [
                 {
                     "data_path": "action_result.data.*.TTL",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "example_values": [
+                        "24 hrs"
+                    ]
                 },
                 {
                     "data_path": "action_result.data.*.Status",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "example_values": [
+                        "[Green]"
+                    ]
                 },
                 {
                     "data_path": "action_result.data.*.IP_Address",
                     "data_type": "string",
                     "contains": [
                         "ip"
+                    ],
+                    "example_values": [
+                        "10.1.1.99"
                     ]
                 },
                 {
@@ -96,40 +102,71 @@
                     "data_type": "string",
                     "contains": [
                         "domain"
+                    ],
+                    "example_values": [
+                        "a.iana-server.net"
                     ]
                 },
                 {
                     "data_path": "action_result.status",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "example_values": [
+                        "success",
+                        "failed"
+                    ]
                 },
                 {
                     "data_path": "action_result.message",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "example_values": [
+                        "Total Objects: 4"
+                    ]
                 },
                 {
                     "data_path": "action_result.summary.total_objects",
-                    "data_type": "numeric"
+                    "data_type": "numeric",
+                    "example_values": [
+                        4
+                    ]
                 },
                 {
                     "data_path": "action_result.parameter.type",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "example_values": [
+                        "dns"
+                    ]
                 },
                 {
                     "data_path": "action_result.parameter.domain",
                     "data_type": "string",
                     "contains": [
                         "domain"
+                    ],
+                    "example_values": [
+                        "example.com"
                     ]
                 },
                 {
                     "data_path": "summary.total_objects",
-                    "data_type": "numeric"
+                    "data_type": "numeric",
+                    "example_values": [
+                        1
+                    ]
                 },
                 {
                     "data_path": "summary.total_objects_successful",
-                    "data_type": "numeric"
+                    "data_type": "numeric",
+                    "example_values": [
+                        1
+                    ]
                 }
             ],
+            "render": {
+                "width": 12,
+                "title": "Lookup Domain",
+                "type": "json",
+                "height": 5
+            },
             "versions": "EQ(*)"
         },
         {
@@ -147,26 +184,28 @@
                     "primary": true,
                     "required": true,
                     "contains": [
-                        "ip"
+                        "ip",
+                        "ipv6"
                     ]
                 }
-            },
-            "render": {
-                "width": 12,
-                "title": "Lookup Ip",
-                "type": "json",
-                "height": 5
             },
             "output": [
                 {
                     "data_path": "action_result.data.*.TTL",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "example_values": [
+                        "24 hrs"
+                    ]
                 },
                 {
                     "data_path": "action_result.data.*.IP_Address",
                     "data_type": "string",
                     "contains": [
-                        "ip"
+                        "ip",
+                        "ipv6"
+                    ],
+                    "example_values": [
+                        "10.1.1.9"
                     ]
                 },
                 {
@@ -174,36 +213,65 @@
                     "data_type": "string",
                     "contains": [
                         "domain"
+                    ],
+                    "example_values": [
+                        "example.com"
                     ]
                 },
                 {
                     "data_path": "action_result.status",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "example_values": [
+                        "success",
+                        "failed"
+                    ]
                 },
                 {
                     "data_path": "action_result.message",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "example_values": [
+                        "Total Objects: 4"
+                    ]
                 },
                 {
                     "data_path": "action_result.summary.total_objects",
-                    "data_type": "numeric"
+                    "data_type": "numeric",
+                    "example_values": [
+                        4
+                    ]
                 },
                 {
                     "data_path": "action_result.parameter.ip",
                     "data_type": "string",
                     "contains": [
-                        "ip"
+                        "ip",
+                        "ipv6"
+                    ],
+                    "example_values": [
+                        "10.1.1.9"
                     ]
                 },
                 {
                     "data_path": "summary.total_objects",
-                    "data_type": "numeric"
+                    "data_type": "numeric",
+                    "example_values": [
+                        1
+                    ]
                 },
                 {
                     "data_path": "summary.total_objects_successful",
-                    "data_type": "numeric"
+                    "data_type": "numeric",
+                    "example_values": [
+                        1
+                    ]
                 }
             ],
+            "render": {
+                "width": 12,
+                "title": "Lookup Ip",
+                "type": "json",
+                "height": 5
+            },
             "versions": "EQ(*)"
         }
     ]
