@@ -14,18 +14,14 @@
 # and limitations under the License.
 #
 #
-# Phantom Imports below
-import phantom.app as phantom
-from phantom.app import BaseConnector
-from phantom.app import ActionResult
-
-# THIS Connector imports
-from mxtoolbox_consts import *
-
-# Regular imports below
-import requests
 import ipaddress
+
+import phantom.app as phantom
+import requests
 import simplejson as json
+from phantom.app import ActionResult, BaseConnector
+
+from mxtoolbox_consts import *
 
 
 class MxtoolboxConnector(BaseConnector):
@@ -225,6 +221,7 @@ if __name__ == '__main__':
     """ This section is executed when run in standalone debug mode """
 
     import sys
+
     import pudb
 
     pudb.set_trace()
