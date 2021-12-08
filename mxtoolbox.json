@@ -5,8 +5,8 @@
     "publisher": "Splunk",
     "type": "investigative",
     "main_module": "mxtoolbox_connector.py",
-    "app_version": "2.0.2",
-    "utctime_updated": "2021-07-14T05:40:02.000000Z",
+    "app_version": "2.0.3",
+    "utctime_updated": "2021-12-08T01:13:42.000000Z",
     "package_name": "phantom_mxtoolbox",
     "product_vendor": "MxToolbox",
     "product_name": "MxToolbox",
@@ -15,7 +15,7 @@
     "logo_dark": "mxtoolbox_dark.svg",
     "license": "Copyright (c) 2016-2021 Splunk Inc.",
     "python_version": "3",
-    "fips_compliant":true,
+    "fips_compliant": true,
     "min_phantom_version": "4.9.39220",
     "latest_tested_versions": [
         "Cloud, api/v1/ June 2, 2021"
