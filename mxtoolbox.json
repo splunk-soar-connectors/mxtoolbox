@@ -13,7 +13,7 @@
     "product_version_regex": ".*",
     "logo": "mxtoolbox.svg",
     "logo_dark": "mxtoolbox_dark.svg",
-    "license": "Copyright (c) 2016-2021 Splunk Inc.",
+    "license": "Copyright (c) 2016-2022 Splunk Inc.",
     "python_version": "3",
     "fips_compliant": true,
     "min_phantom_version": "4.9.39220",
@@ -300,7 +300,7 @@
             },
             {
                 "module": "urllib3",
-                "input_file": "wheels/urllib3-1.26.7-py2.py3-none-any.whl"
+                "input_file": "wheels/urllib3-1.26.8-py2.py3-none-any.whl"
             }
         ]
     }
