@@ -1,25 +1,27 @@
-# --
 # File: mxtoolbox_connector.py
 #
-# Copyright (c) 2016-2021 Splunk Inc.
+# Copyright (c) 2016-2022 Splunk Inc.
 #
-# SPLUNK CONFIDENTIAL - Use or disclosure of this material in whole or in part
-# without a valid written license from Splunk Inc. is PROHIBITED.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
 #
-# --
-
-# Phantom Imports below
-import phantom.app as phantom
-from phantom.app import BaseConnector
-from phantom.app import ActionResult
-
-# THIS Connector imports
-from mxtoolbox_consts import *
-
-# Regular imports below
-import requests
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software distributed under
+# the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+# either express or implied. See the License for the specific language governing permissions
+# and limitations under the License.
+#
+#
 import ipaddress
+
+import phantom.app as phantom
+import requests
 import simplejson as json
+from phantom.app import ActionResult, BaseConnector
+
+from mxtoolbox_consts import *
 
 
 class MxtoolboxConnector(BaseConnector):
@@ -219,6 +221,7 @@ if __name__ == '__main__':
     """ This section is executed when run in standalone debug mode """
 
     import sys
+
     import pudb
 
     pudb.set_trace()

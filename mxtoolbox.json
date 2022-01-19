@@ -5,16 +5,17 @@
     "publisher": "Splunk",
     "type": "investigative",
     "main_module": "mxtoolbox_connector.py",
-    "app_version": "2.0.3",
-    "utctime_updated": "2021-07-15T00:47:16.000000Z",
+    "app_version": "2.0.5",
+    "utctime_updated": "2022-01-14T00:18:50.000000Z",
     "package_name": "phantom_mxtoolbox",
     "product_vendor": "MxToolbox",
     "product_name": "MxToolbox",
     "product_version_regex": ".*",
     "logo": "mxtoolbox.svg",
     "logo_dark": "mxtoolbox_dark.svg",
-    "license": "Copyright (c) 2016-2021 Splunk Inc.",
+    "license": "Copyright (c) 2016-2022 Splunk Inc.",
     "python_version": "3",
+    "fips_compliant": true,
     "min_phantom_version": "4.9.39220",
     "latest_tested_versions": [
         "Cloud, api/v1/ June 2, 2021"
@@ -274,5 +275,33 @@
             },
             "versions": "EQ(*)"
         }
-    ]
+    ],
+    "pip_dependencies": {
+        "wheel": [
+            {
+                "module": "certifi",
+                "input_file": "wheels/certifi-2021.10.8-py2.py3-none-any.whl"
+            },
+            {
+                "module": "chardet",
+                "input_file": "wheels/chardet-3.0.4-py2.py3-none-any.whl"
+            },
+            {
+                "module": "idna",
+                "input_file": "wheels/idna-2.10-py2.py3-none-any.whl"
+            },
+            {
+                "module": "requests",
+                "input_file": "wheels/requests-2.25.0-py2.py3-none-any.whl"
+            },
+            {
+                "module": "simplejson",
+                "input_file": "wheels/simplejson-3.17.2-cp36-cp36m-manylinux2010_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl"
+            },
+            {
+                "module": "urllib3",
+                "input_file": "wheels/urllib3-1.26.8-py2.py3-none-any.whl"
+            }
+        ]
+    }
 }
