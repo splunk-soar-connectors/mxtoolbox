@@ -2,7 +2,7 @@
 # MxToolbox
 
 Publisher: Splunk  
-Connector Version: 2\.0\.3  
+Connector Version: 2\.0\.5  
 Product Vendor: MxToolbox  
 Product Name: MxToolbox  
 Product Version Supported (regex): "\.\*"  
