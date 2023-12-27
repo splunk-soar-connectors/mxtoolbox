@@ -1,6 +1,6 @@
 # File: mxtoolbox_connector.py
 #
-# Copyright (c) 2016-2022 Splunk Inc.
+# Copyright (c) 2016-2023 Splunk Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -127,7 +127,7 @@ class MxtoolboxConnector(BaseConnector):
         action_result = ActionResult()
 
         # Start progress message of rest call
-        self.save_progress(MXTOOLBOX_MSG_GET_INCIDENT_TEST)
+        self.save_progress(MXTOOLBOX_MESSAGE_GET_INCIDENT_TEST)
 
         # Call the rest call function
         ret_val, response = self._make_rest_call(endpoint, action_result, params=param)
@@ -142,6 +142,14 @@ class MxtoolboxConnector(BaseConnector):
             return phantom.APP_ERROR
         self.save_progress(MXTOOLBOX_SUCC_CONNECTIVITY_MESSAGE)
         return self.set_status_save_progress(phantom.APP_SUCCESS, MXTOOLBOX_SUCC_CONNECTIVITY_TEST)
+
+    def _lookup_ip(self, param):
+
+        self.save_progress(MXTOOLBOX_USING_BASE_URL, base_url=self._base_url)
+
+        self.save_progress(phantom.APP_PROG_CONNECTING_TO_ELLIPSES, MXTOOLBOX_BASE_URL)
+
+        return self._lookup_domain(param)
 
     def _lookup_domain(self, param):
 
@@ -198,7 +206,7 @@ class MxtoolboxConnector(BaseConnector):
                 action_result.add_data(temp_dict)
 
         if (len(response[MXTOOLBOX_JSON_RESP_KEY]) < 1):
-            return (action_result.set_status(phantom.APP_ERROR, MXTOOLBOX_ERROR_LOOKUP_NO_DATA_FOUND))
+            return (action_result.set_status(phantom.APP_ERROR, MXTOOLBOX_ERR_LOOKUP_NO_DATA_FOUND))
 
         action_result.set_summary({"total_objects": len(response[MXTOOLBOX_JSON_RESP_KEY])})
 
@@ -216,7 +224,7 @@ class MxtoolboxConnector(BaseConnector):
         elif (action == ACTION_ID_LOOKUP_DOMAIN):
             ret_val = self._lookup_domain(param)
         elif (action == ACTION_ID_LOOKUP_IP):
-            ret_val = self._lookup_domain(param)
+            ret_val = self._lookup_ip(param)
         return ret_val
 
 
