@@ -13,7 +13,7 @@
     "product_version_regex": ".*",
     "logo": "mxtoolbox.svg",
     "logo_dark": "mxtoolbox_dark.svg",
-    "license": "Copyright (c) 2016-2022 Splunk Inc.",
+    "license": "Copyright (c) 2016-2023 Splunk Inc.",
     "python_version": "3",
     "fips_compliant": true,
     "min_phantom_version": "5.1.0",

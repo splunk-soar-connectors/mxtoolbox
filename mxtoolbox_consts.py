@@ -1,6 +1,6 @@
 # File: mxtoolbox_consts.py
 #
-# Copyright (c) 2016-2022 Splunk Inc.
+# Copyright (c) 2016-2023 Splunk Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -31,7 +31,7 @@ MXTOOLBOX_JSON_PER_PAGE = "max_results_per_page"
 MXTOOLBOX_JSON_PAGE = "page_number"
 MXTOOLBOX_JSON_PORT = "port"
 
-MXTOOLBOX_MSG_GET_INCIDENT_TEST = "Querying google.com. . ."
+MXTOOLBOX_MESSAGE_GET_INCIDENT_TEST = "Querying google.com. . ."
 
 MXTOOLBOX_SUCC_LOOKUP = "Successfully received {type} of {domain}."
 MXTOOLBOX_SUCC_CONNECTIVITY_MESSAGE = "Successfully queried google.com and received a JSON reply."
@@ -45,4 +45,4 @@ MXTOOLBOX_USING_PORT = "?port={port}"
 
 ACTION_ID_LOOKUP_DOMAIN = 'lookup_domain'
 ACTION_ID_LOOKUP_IP = "lookup_ip"
-MXTOOLBOX_ERROR_LOOKUP_NO_DATA_FOUND = "Lookup did not return any useful information."
+MXTOOLBOX_ERR_LOOKUP_NO_DATA_FOUND = "Lookup did not return any useful information."
