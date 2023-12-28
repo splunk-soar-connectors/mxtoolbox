@@ -2,11 +2,11 @@
 # MxToolbox
 
 Publisher: Splunk  
-Connector Version: 2\.0\.7  
+Connector Version: 2.0.8  
 Product Vendor: MxToolbox  
 Product Name: MxToolbox  
-Product Version Supported (regex): "\.\*"  
-Minimum Product Version: 5\.1\.0  
+Product Version Supported (regex): ".\*"  
+Minimum Product Version: 5.1.0  
 
 This app implements investigative actions on domains and IPs
 
@@ -15,7 +15,7 @@ The below configuration variables are required for this Connector to operate.  T
 
 VARIABLE | REQUIRED | TYPE | DESCRIPTION
 -------- | -------- | ---- | -----------
-**api\_token** |  required  | password | API token
+**api_token** |  required  | password | API token
 
 ### Supported Actions  
 [test connectivity](#action-test-connectivity) - Validates the asset configuration for connectivity  
@@ -28,7 +28,7 @@ Validates the asset configuration for connectivity
 Type: **test**  
 Read only: **True**
 
-This action sends a single request to the MxToolbox API\.
+This action sends a single request to the MxToolbox API.
 
 #### Action Parameters
 No parameters are required for this action
@@ -42,7 +42,7 @@ Returns the result of a lookup on a specific url
 Type: **investigate**  
 Read only: **True**
 
-Lookup types in mission control are limited to\:<ul><li><b>mx</b></li><li><b>a</b></li><li><b>dns</b></li><li><b>spf</b></li><li><b>txt</b></li><li><b>soa</b></li></ul>There is support from MxToolbox for other types of lookups which can be specified within a playbook\.
+Lookup types in mission control are limited to:<ul><li><b>mx</b></li><li><b>a</b></li><li><b>dns</b></li><li><b>spf</b></li><li><b>txt</b></li><li><b>soa</b></li></ul>There is support from MxToolbox for other types of lookups which can be specified within a playbook.
 
 #### Action Parameters
 PARAMETER | REQUIRED | DESCRIPTION | TYPE | CONTAINS
@@ -51,19 +51,19 @@ PARAMETER | REQUIRED | DESCRIPTION | TYPE | CONTAINS
 **type** |  required  | Type of domain lookup | string | 
 
 #### Action Output
-DATA PATH | TYPE | CONTAINS
---------- | ---- | --------
-action\_result\.data\.\*\.TTL | string | 
-action\_result\.data\.\*\.Status | string | 
-action\_result\.data\.\*\.IP\_Address | string |  `ip` 
-action\_result\.data\.\*\.Domain\_Name | string |  `domain` 
-action\_result\.status | string | 
-action\_result\.message | string | 
-action\_result\.summary\.total\_objects | numeric | 
-action\_result\.parameter\.type | string | 
-action\_result\.parameter\.domain | string |  `domain` 
-summary\.total\_objects | numeric | 
-summary\.total\_objects\_successful | numeric |   
+DATA PATH | TYPE | CONTAINS | EXAMPLE VALUES
+--------- | ---- | -------- | --------------
+action_result.data.\*.TTL | string |  |   24 hrs 
+action_result.data.\*.Status | string |  |   [Green] 
+action_result.data.\*.IP_Address | string |  `ip`  |   10.1.1.99 
+action_result.data.\*.Domain_Name | string |  `domain`  |   a.iana-server.net 
+action_result.status | string |  |   success  failed 
+action_result.message | string |  |   Total Objects: 4 
+action_result.summary.total_objects | numeric |  |   4 
+action_result.parameter.type | string |  |   dns 
+action_result.parameter.domain | string |  `domain`  |   example.com 
+summary.total_objects | numeric |  |   1 
+summary.total_objects_successful | numeric |  |   1   
 
 ## action: 'lookup ip'
 Returns the result of a lookup on a specific ip address
@@ -71,7 +71,7 @@ Returns the result of a lookup on a specific ip address
 Type: **investigate**  
 Read only: **True**
 
-This action only uses the lookup type of 'ptr'\.
+This action only uses the lookup type of 'ptr'.
 
 #### Action Parameters
 PARAMETER | REQUIRED | DESCRIPTION | TYPE | CONTAINS
@@ -79,14 +79,14 @@ PARAMETER | REQUIRED | DESCRIPTION | TYPE | CONTAINS
 **ip** |  required  | IP to query | string |  `ip`  `ipv6` 
 
 #### Action Output
-DATA PATH | TYPE | CONTAINS
---------- | ---- | --------
-action\_result\.data\.\*\.TTL | string | 
-action\_result\.data\.\*\.IP\_Address | string |  `ip`  `ipv6` 
-action\_result\.data\.\*\.Domain\_Name | string |  `domain` 
-action\_result\.status | string | 
-action\_result\.message | string | 
-action\_result\.summary\.total\_objects | numeric | 
-action\_result\.parameter\.ip | string |  `ip`  `ipv6` 
-summary\.total\_objects | numeric | 
-summary\.total\_objects\_successful | numeric | 
+DATA PATH | TYPE | CONTAINS | EXAMPLE VALUES
+--------- | ---- | -------- | --------------
+action_result.data.\*.TTL | string |  |   24 hrs 
+action_result.data.\*.IP_Address | string |  `ip`  `ipv6`  |   10.1.1.9 
+action_result.data.\*.Domain_Name | string |  `domain`  |   example.com 
+action_result.status | string |  |   success  failed 
+action_result.message | string |  |   Total Objects: 4 
+action_result.summary.total_objects | numeric |  |   4 
+action_result.parameter.ip | string |  `ip`  `ipv6`  |   10.1.1.9 
+summary.total_objects | numeric |  |   1 
+summary.total_objects_successful | numeric |  |   1 
