@@ -1,6 +1,6 @@
 # File: mxtoolbox_connector.py
 #
-# Copyright (c) 2016-2023 Splunk Inc.
+# Copyright (c) 2016-2025 Splunk Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -29,12 +29,11 @@ class MxtoolboxConnector(BaseConnector):
     # Actions are limited to a couple of things on the API due to the very low (64) limit
 
     def __init__(self):
-
         # Call the super BaseConnector class init first
-        super(MxtoolboxConnector, self).__init__()
+        super().__init__()
 
     def initialize(self):
-        """ Called once for every action.  All initialization things come here.  URL, and whatnot. """
+        """Called once for every action.  All initialization things come here.  URL, and whatnot."""
 
         config = self.get_config()
 
@@ -45,14 +44,14 @@ class MxtoolboxConnector(BaseConnector):
         self._key = config.get(MXTOOLBOX_JSON_API_TOKEN)
 
         # Setting the header to an authorization allows the user to skip logging in and provide the api key only.
-        self._headers = {'Authorization': self._key}
+        self._headers = {"Authorization": self._key}
 
         self.set_validator("ipv6", self._is_ip)
 
         return phantom.APP_SUCCESS
 
     def _is_ip(self, input_ip_address):
-        """ Function that checks given address and return True if address is valid IPv4 or IPV6 address.
+        """Function that checks given address and return True if address is valid IPv4 or IPV6 address.
 
         :param input_ip_address: IP address
         :return: status (success/failure)
@@ -68,8 +67,8 @@ class MxtoolboxConnector(BaseConnector):
         return True
 
     def _make_rest_call(self, endpoint, action_result, headers=None, params=None, data=None, method="get"):
-        """ Makes the actual rest call for any action that requires a rest call.  Returns success or fail, and
-            the response """
+        """Makes the actual rest call for any action that requires a rest call.  Returns success or fail, and
+        the response"""
 
         if headers is None:
             headers = {}
@@ -83,16 +82,14 @@ class MxtoolboxConnector(BaseConnector):
         request_func = getattr(requests, method)
 
         # Error checking for valid call method
-        if (not request_func):
+        if not request_func:
             action_result.set_status(phantom.APP_ERROR, MXTOOLBOX_ERR_API_UNSUPPORTED_METHOD, method=method)
 
         # Start actual rest call progress message
-        self.save_progress('Using {0} for authentication'.format(self._auth_method))
+        self.save_progress(f"Using {self._auth_method} for authentication")
 
         try:
-            r = request_func(self._base_url + endpoint,
-                             headers=headers,
-                             verify=False)
+            r = request_func(self._base_url + endpoint, headers=headers, verify=False)
         except Exception as e:
             return action_result.set_status(phantom.APP_ERROR, MXTOOLBOX_ERR_SERVER_CONNECTION, e), resp_json
 
@@ -104,15 +101,15 @@ class MxtoolboxConnector(BaseConnector):
             return action_result.set_status(phantom.APP_ERROR, msg_string, e), resp_json
 
         # This if/else block is the final decider for whether the action returns as SUCCESS or failure.
-        if (200 <= r.status_code <= 399):
+        if 200 <= r.status_code <= 399:
             return phantom.APP_SUCCESS, resp_json
         else:
-            details = json.dumps(resp_json).replace('{', '').replace('}', '')
+            details = json.dumps(resp_json).replace("{", "").replace("}", "")
             return action_result.set_status(phantom.APP_ERROR, MXTOOLBOX_ERR_FROM_SERVER.format(status=r.status_code, detail=details)), resp_json
 
     def _test_connectivity(self, param):
-        """ This action tests the connectivity to the Mxtoolbox API.  It must make one call to the API which counts
-            against the daily limit.  Test wisely. """
+        """This action tests the connectivity to the Mxtoolbox API.  It must make one call to the API which counts
+        against the daily limit.  Test wisely."""
 
         # Send connectivity progress message
         self.save_progress(MXTOOLBOX_USING_BASE_URL, base_url=MXTOOLBOX_BASE_URL)
@@ -132,7 +129,7 @@ class MxtoolboxConnector(BaseConnector):
         # Call the rest call function
         ret_val, response = self._make_rest_call(endpoint, action_result, params=param)
 
-        if (phantom.is_fail(ret_val)):
+        if phantom.is_fail(ret_val):
             self.debug_print(action_result.get_message())
 
             self.set_status(phantom.APP_ERROR, action_result.get_message())
@@ -144,7 +141,6 @@ class MxtoolboxConnector(BaseConnector):
         return self.set_status_save_progress(phantom.APP_SUCCESS, MXTOOLBOX_SUCC_CONNECTIVITY_TEST)
 
     def _lookup_ip(self, param):
-
         self.save_progress(MXTOOLBOX_USING_BASE_URL, base_url=self._base_url)
 
         self.save_progress(phantom.APP_PROG_CONNECTING_TO_ELLIPSES, MXTOOLBOX_BASE_URL)
@@ -152,7 +148,6 @@ class MxtoolboxConnector(BaseConnector):
         return self._lookup_domain(param)
 
     def _lookup_domain(self, param):
-
         action_result = self.add_action_result(ActionResult(dict(param)))
 
         self.save_progress(MXTOOLBOX_USING_BASE_URL, base_url=self._base_url)
@@ -162,7 +157,6 @@ class MxtoolboxConnector(BaseConnector):
         command = param.get(MXTOOLBOX_JSON_COMMAND, False)
 
         if isinstance(command, bool):
-
             ip = param[MXTOOLBOX_JSON_IP]
             ip = ipaddress.ip_address(ip).exploded
             domain = MXTOOLBOX_DOMAIN_LINK.format(domain=ip)
@@ -170,7 +164,6 @@ class MxtoolboxConnector(BaseConnector):
             endpoint = MXTOOLBOX_BASE_ENDPOINT_URL.format(type="ptr", domain=domain)
 
         else:
-
             domain = param[MXTOOLBOX_JSON_DOMAIN]
 
             endpoint = MXTOOLBOX_BASE_ENDPOINT_URL.format(type=command, domain=domain)
@@ -178,7 +171,7 @@ class MxtoolboxConnector(BaseConnector):
         ret_val, response = self._make_rest_call(endpoint, action_result)
 
         # Handle failures (if any)
-        if (phantom.is_fail(ret_val)):
+        if phantom.is_fail(ret_val):
             self.debug_print(action_result.get_message())
             self.set_status(phantom.APP_ERROR, action_result.get_message())
             return phantom.APP_ERROR
@@ -205,30 +198,30 @@ class MxtoolboxConnector(BaseConnector):
             if temp_dict:
                 action_result.add_data(temp_dict)
 
-        if (len(response[MXTOOLBOX_JSON_RESP_KEY]) < 1):
-            return (action_result.set_status(phantom.APP_ERROR, MXTOOLBOX_ERR_LOOKUP_NO_DATA_FOUND))
+        if len(response[MXTOOLBOX_JSON_RESP_KEY]) < 1:
+            return action_result.set_status(phantom.APP_ERROR, MXTOOLBOX_ERR_LOOKUP_NO_DATA_FOUND)
 
         action_result.set_summary({"total_objects": len(response[MXTOOLBOX_JSON_RESP_KEY])})
 
         return action_result.set_status(phantom.APP_SUCCESS)
 
     def handle_action(self, param):
-        """ All actions go through here first to be piped to the correct place. """
+        """All actions go through here first to be piped to the correct place."""
 
         action = self.get_action_identifier()
 
         ret_val = phantom.APP_SUCCESS
 
-        if (action == phantom.ACTION_ID_TEST_ASSET_CONNECTIVITY):
+        if action == phantom.ACTION_ID_TEST_ASSET_CONNECTIVITY:
             ret_val = self._test_connectivity(param)
-        elif (action == ACTION_ID_LOOKUP_DOMAIN):
+        elif action == ACTION_ID_LOOKUP_DOMAIN:
             ret_val = self._lookup_domain(param)
-        elif (action == ACTION_ID_LOOKUP_IP):
+        elif action == ACTION_ID_LOOKUP_IP:
             ret_val = self._lookup_ip(param)
         return ret_val
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     """ This section is executed when run in standalone debug mode """
 
     import sys
@@ -240,7 +233,7 @@ if __name__ == '__main__':
     with open(sys.argv[1]) as f:
         in_json = f.read()
         in_json = json.loads(in_json)
-        print(json.dumps(in_json, indent=' ' * 4))
+        print(json.dumps(in_json, indent=" " * 4))
 
         connector = MxtoolboxConnector()
 

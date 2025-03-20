@@ -1,6 +1,6 @@
 # File: mxtoolbox_consts.py
 #
-# Copyright (c) 2016-2023 Splunk Inc.
+# Copyright (c) 2016-2025 Splunk Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -43,6 +43,6 @@ MXTOOLBOX_TEST_FAILURE = "Invalid API key."
 MXTOOLBOX_USING_BASE_URL = "Using url: {base_url}"
 MXTOOLBOX_USING_PORT = "?port={port}"
 
-ACTION_ID_LOOKUP_DOMAIN = 'lookup_domain'
+ACTION_ID_LOOKUP_DOMAIN = "lookup_domain"
 ACTION_ID_LOOKUP_IP = "lookup_ip"
 MXTOOLBOX_ERR_LOOKUP_NO_DATA_FOUND = "Lookup did not return any useful information."
