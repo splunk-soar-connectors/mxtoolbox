@@ -14,7 +14,7 @@
     "logo": "mxtoolbox.svg",
     "logo_dark": "mxtoolbox_dark.svg",
     "license": "Copyright (c) 2016-2025 Splunk Inc.",
-    "python_version": "3",
+    "python_version": ["3.9", "3.13"],
     "fips_compliant": true,
     "min_phantom_version": "5.1.0",
     "latest_tested_versions": [
