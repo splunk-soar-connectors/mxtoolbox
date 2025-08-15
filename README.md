@@ -1,9 +1,9 @@
 # MxToolbox
 
-Publisher: Splunk \
-Connector Version: 2.0.8 \
-Product Vendor: MxToolbox \
-Product Name: MxToolbox \
+Publisher: Splunk <br>
+Connector Version: 2.0.8 <br>
+Product Vendor: MxToolbox <br>
+Product Name: MxToolbox <br>
 Minimum Product Version: 5.1.0
 
 This app implements investigative actions on domains and IPs
@@ -18,15 +18,15 @@ VARIABLE | REQUIRED | TYPE | DESCRIPTION
 
 ### Supported Actions
 
-[test connectivity](#action-test-connectivity) - Validates the asset configuration for connectivity \
-[lookup domain](#action-lookup-domain) - Returns the result of a lookup on a specific url \
+[test connectivity](#action-test-connectivity) - Validates the asset configuration for connectivity <br>
+[lookup domain](#action-lookup-domain) - Returns the result of a lookup on a specific url <br>
 [lookup ip](#action-lookup-ip) - Returns the result of a lookup on a specific ip address
 
 ## action: 'test connectivity'
 
 Validates the asset configuration for connectivity
 
-Type: **test** \
+Type: **test** <br>
 Read only: **True**
 
 This action sends a single request to the MxToolbox API.
@@ -43,7 +43,7 @@ No Output
 
 Returns the result of a lookup on a specific url
 
-Type: **investigate** \
+Type: **investigate** <br>
 Read only: **True**
 
 Lookup types in mission control are limited to:<ul><li><b>mx</b></li><li><b>a</b></li><li><b>dns</b></li><li><b>spf</b></li><li><b>txt</b></li><li><b>soa</b></li></ul>There is support from MxToolbox for other types of lookups which can be specified within a playbook.
@@ -75,7 +75,7 @@ summary.total_objects_successful | numeric | | 1 |
 
 Returns the result of a lookup on a specific ip address
 
-Type: **investigate** \
+Type: **investigate** <br>
 Read only: **True**
 
 This action only uses the lookup type of 'ptr'.
